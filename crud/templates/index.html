@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="alert alert-danger text-center">Function Based View ModelForm CRUD Project</h1>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-lg-4">
+                <h3 class="alert alert-success text-center">Add New Student</h3>
+                <form action="" method="POST" class="border p-4 rounded-3">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" value="Add" class="btn btn-success mt-3">
+                </form>
+            </div>
+            <div class="col-lg-8 text-center">
+                <h3 class="alert alert-success text-center">Show Student Information</h3>
+                <div class="box border rounded-3 p-2" >
+                {% if data %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PASSWORD</th>
+                           
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in data %}
+                        <tr>
+                            <td>{{d.id}}</td>
+                            <td>{{d.name}}</td>
+                            <td>{{d.email}}</td>
+                            <td>{{d.password}}</td>
+            
+        
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4>Data Not Found</h4>
+                {% endif %}
+                </div>
+                <div class="row text-start mt-3">
+                    <!-- Button trigger modal -->
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Delete
+                          </button>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Record</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <form action="/delete">
+                                            <input type="number" name="id_number" required placeholder="Enter Your Id" class="form-control">
+                                            <input type="submit" value="Delete" class="btn btn-danger mt-3 " >
+                                        </form>
+                                  </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+
+             <!-- edit button  -->
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Edit
+                    </button>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Your New Details</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <form action="/edit">
+                                            
+                                        <p>
+                                            <label for="" class="form-label">ID</label>
+                                            <input type="number" name="id_number"  class="form-control" required>
+                                        </p>
+
+                                        <p>
+                                            <label for="" class="form-label">Name</label>
+                                            <input type="text" name="name" class="form-control" required>
+                                        </p>
+
+                                        <p>
+                                            <label for="" class="form-label">Email</label>
+                                            <input type="email" name="email"  class="form-control" required>
+                                        </p>
+
+                                        <p>
+                                            <label for="" class="form-label">Password</label>
+                                            <input type="password" name="password"  class="form-control" required>
+                                        </p>
+
+                                            <input type="submit" value="Edit" class="btn btn-warning mt-3 " >
+                                        </form>
+                                  </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    
+
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>
